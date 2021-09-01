@@ -1,0 +1,59 @@
+{
+  "_from": "emmet-ls",
+  "_id": "emmet-ls@0.1.1",
+  "_inBundle": false,
+  "_integrity": "sha512-1JkqXBQtSd+DeA3r5QEFhni+hz6+edEYhOHEbZOFjHYgUeVgI2TPAQQvyhBYrqrRNhQIyZEkHNcmVyKHWTmVUg==",
+  "_location": "/emmet-ls",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "emmet-ls",
+    "name": "emmet-ls",
+    "escapedName": "emmet-ls",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/emmet-ls/-/emmet-ls-0.1.1.tgz",
+  "_shasum": "dcde06b9de1f96ce12dbecb55cfa2f5362040b34",
+  "_spec": "emmet-ls",
+  "_where": "/home/pedro/.config/nvim",
+  "author": {
+    "name": "aca"
+  },
+  "bin": {
+    "emmet-ls": "out/server.js"
+  },
+  "bugs": {
+    "url": "https://github.com/aca/emmet-ls/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@types/node": "^14.14.16",
+    "emmet": "^2.2.1",
+    "typescript": "^4.2.2",
+    "vscode-languageserver": "^7.0.0",
+    "vscode-languageserver-textdocument": "^1.0.1"
+  },
+  "deprecated": false,
+  "description": "emmet support by LSP",
+  "engines": {
+    "node": "*"
+  },
+  "homepage": "https://github.com/aca/emmet-ls#readme",
+  "license": "MIT",
+  "name": "emmet-ls",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aca/emmet-ls.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "npm run-script build && npm link"
+  },
+  "version": "0.1.1"
+}
