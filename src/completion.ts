@@ -1,4 +1,4 @@
-import { extract } from "emmet";
+import expand, { extract } from "emmet";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import {
   TextDocumentPositionParams,
@@ -7,7 +7,8 @@ import {
   CompletionItemKind
 } from "vscode-languageserver/node";
 
-function isMarkupEmmet(language: String):boolean {
+
+function isMarkupEmmet(language: string): boolean {
   let markupFiletypes = [ 'html', 'xml', 'markdown', '']
   if (markupFiletypes.some(filetype => language == filetype)) {
     return true
@@ -15,9 +16,39 @@ function isMarkupEmmet(language: String):boolean {
   return false
 }
 
-function getPositionParams(language: String) {
+function getExtracted(language: string, line: string, character: number) {
+  let extracted
+  if (isMarkupEmmet(language)) {
+    extracted = extract(line, character)
+  } else {
+    extracted = extract(line, character, { type: "stylesheet" })
+  }
 
+  if (extracted?.abbreviation == undefined) {
+    throw "failed to parse line";
+  }
+
+  return {
+    left: extracted.start,
+    right: extracted.end,
+    abbreviation: extracted.abbreviation,
+    location: extracted.location
+  }
 }
+
+function getExpanded(language: string, abbreviation: string): string {
+  let expanded
+  let options = {
+    "output.field": (index:any, placeholder:any) => `\$\{${index}${placeholder ? ":" + placeholder : ""}\}`,
+  }
+  if (isMarkupEmmet(language)) {
+    expanded = expand(abbreviation, { options })
+  } else {
+    expanded = expand(abbreviation, { type: "stylesheet", options})
+  }
+  return expanded
+}
+
 
 function complete(textDocsPosition: TextDocumentPositionParams, documents: TextDocuments<TextDocument>) {
   let docs = documents.get(textDocsPosition.textDocument.uri);
@@ -27,37 +58,10 @@ function complete(textDocsPosition: TextDocumentPositionParams, documents: TextD
   let linenr = textDocsPosition.position.line;
   let line = String(content.split(/\r?\n/g)[linenr]);
   let character = textDocsPosition.position.character;
-  let extractPosition =
-    languageId != "css" ? extract(line, character) : extract(line, character, { type: "stylesheet" });
 
-  if (extractPosition?.abbreviation == undefined) {
-    throw "failed to parse line";
-  }
+  const { left, right, abbreviation } = getExtracted(languageId, line, character)
+  let textResult = getExpanded(languageId, abbreviation)
 
-  let left = extractPosition.start;
-  let right = extractPosition.start;
-  let abbreviation = extractPosition.abbreviation;
-  let textResult = "";
-  if (languageId != "css") {
-    /* const htmlconfig = resolveConfig({
-      options: {
-        "output.field": (index, placeholder) => ` \$\{${index}${placeholder ? ":" + placeholder : ""}\} `,
-      },
-    });
-    const markup = parseMarkup(abbreviation, htmlconfig);
-    textResult = stringifyMarkup(markup, htmlconfig); */
-  } else {
-    /* const cssConfig = resolveConfig({
-      type: "stylesheet",
-      options: {
-        "output.field": (index, placeholder) => ` \$\{${index}${placeholder ? ":" + placeholder : ""}\} `,
-      },
-    });
-    const markup = parseStylesheet(abbreviation, cssConfig);
-    textResult = stringifyStylesheet(markup, cssConfig); */
-  }
-
-  textResult = textResult.replace(/ /g, '')
   const range = {
     start: {
       line: linenr,

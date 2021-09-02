@@ -5,7 +5,6 @@ import { TextDocument } from "vscode-languageserver-textdocument";
 import {
   CompletionItem,
   createConnection,
-  InitializeParams,
   InitializeResult,
   ProposedFeatures,
   TextDocumentPositionParams,
@@ -15,31 +14,16 @@ import {
 
 let connection = createConnection(ProposedFeatures.all);
 let documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
-let hasWorkspaceFolderCapability: boolean = false;
 
-connection.onInitialize(function (params: InitializeParams) {
-  let capabilities = params.capabilities;
-
-  // Does the client support the `workspace/configuration` request?
-  // If not, we fall back using global settings.
-  hasWorkspaceFolderCapability = !!(capabilities.workspace && !!capabilities.workspace.workspaceFolders);
-
+connection.onInitialize(function () {
   const result: InitializeResult = {
     capabilities: {
       textDocumentSync: TextDocumentSyncKind.Incremental,
-      // Tell the client that this server supports code completion.
       completionProvider: {
         resolveProvider: true,
       },
     },
   };
-  if (hasWorkspaceFolderCapability) {
-    result.capabilities.workspace = {
-      workspaceFolders: {
-        supported: true,
-      },
-    };
-  }
   return result;
 });
 
