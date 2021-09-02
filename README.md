@@ -1,60 +1,68 @@
 # emmet-ls
 
-Emmet support based on LSP.  
-Started as [coc-emmet](https://github.com/neoclide/coc-emmet) replacement for [completion-nvim](https://github.com/nvim-lua/completion-nvim). Should work with any lsp client but not tested.
+Emmet support based on LSP. This is a fork of [this](https://github.com/aca/emmet-ls) project that seems unmaintained
 
 ![alt](./.image/capture.gif)
 
+#### Requirements
+1. [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) Installed
+2. A completion plugin that support LSP like:
+    - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+    - [nvim-completion](https://github.com/nvim-lua/completion-nvim)
 
 #### Install
+
 ```
 npm install -g emmet-ls
 ```
 
-#### Configuration 
+#### Configuration
 
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig)
+  In your neovim config:
+
   ```lua
   local lspconfig = require'lspconfig'
-  local configs = require'lspconfig/configs'    
+  local configs = require'lspconfig/configs'
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-  if not lspconfig.emmet_ls then    
-    configs.emmet_ls = {    
-      default_config = {    
-        cmd = {'emmet-ls', '--stdio'};
-        filetypes = {'html', 'css'};
-        root_dir = function(fname)    
-          return vim.loop.cwd()
-        end;    
-        settings = {};    
-      };    
-    }    
-  end    
-  lspconfig.emmet_ls.setup{ capabilities = capabilities; }
-  ```
-- [completion-nvim](https://github.com/nvim-lua/completion-nvim)
+  configs.emmet_ls = {
+    default_config = {
+      cmd = {'emmet-ls', '--stdio'};
+      filetypes = {'html', 'css'};
+      root_dir = function(fname)
+        return vim.loop.cwd()
+        end;
+      settings = {};
+    };
+  }
 
-  Completion is triggered if completion_trigger_character is entered. 
-  It's limitation of completion-nvim.
+  lspconfig.emmet_ls.setup{ capabilities = capabilities }
 
-  ```lua
-  let g:completion_trigger_character = ['.']
-  ```
-  If you have set it like this, You will have to add trailing '.' after emmet abbreviation.
-  ```
-  div>h.
-  ```
-  And it will be expanded to 
-  ```
-  <div>
-    <h class=""></h>
-  </div>
   ```
 
+Just type:
 
+```
+table>tr*3>td*2
+```
 
+And it will be expanded to:
 
-
+```html
+<table>
+  <tr>
+    <td>|</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+```
