@@ -1,5 +1,5 @@
 {
-  "name": "emmet.nvim",
+  "name": "emmet_ls",
   "version": "1.0.0",
   "description": "Just emmet completion with LSP",
   "main": "dist/server.js",
@@ -23,5 +23,8 @@
     "typescript": "^4.4.2",
     "vscode-languageserver": "^7.0.0",
     "vscode-languageserver-textdocument": "^1.0.1"
+  },
+  "bin": {
+    "emmet_ls": "dist/server.js"
   }
 }
