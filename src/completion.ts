@@ -61,10 +61,11 @@ function getExpanded(language: string, abbreviation: string): string {
   let options = {
     "output.field": (index:any, placeholder:any) => `\$\{${index}${placeholder ? ":" + placeholder : ""}\}`,
   }
+  let syntax = getSyntax(language)
   if (isMarkupEmmet(language)) {
-    expanded = expand(abbreviation, { options })
+    expanded = expand(abbreviation, { options, syntax })
   } else {
-    expanded = expand(abbreviation, { type: "stylesheet", options})
+    expanded = expand(abbreviation, { type: "stylesheet", options, syntax})
   }
   return expanded
 }
