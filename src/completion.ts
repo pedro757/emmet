@@ -1,4 +1,5 @@
 import expand, { extract } from "emmet";
+import { syntaxes } from "emmet/dist/src/config"
 import { TextDocument } from "vscode-languageserver-textdocument";
 import {
   TextDocumentPositionParams,
@@ -7,13 +8,32 @@ import {
   CompletionItemKind
 } from "vscode-languageserver/node";
 
+function parseLanguage(language:string): string {
+  if (language == 'javacriptreact' || language == 'typescriptreact') language = 'jsx'
+  if (language === 'javascript') language = 'js'
+  return language
+}
 
 function isMarkupEmmet(language: string): boolean {
-  let markupFiletypes = [ 'html', 'xml', 'markdown', '']
-  if (markupFiletypes.some(filetype => language == filetype)) {
+  let markupSyntaxes = syntaxes.markup
+  language = parseLanguage(language)
+
+  if (markupSyntaxes.some(filetype => language == filetype)) {
     return true
   }
+
   return false
+}
+
+function getSyntax(language: string): string | undefined {
+  let availableSyntaxes = [...syntaxes.markup, ...syntaxes.stylesheet];
+  language = parseLanguage(language)
+
+  if (availableSyntaxes.some(syntax => syntax == language)) {
+    return language
+  }
+
+  return undefined
 }
 
 function getExtracted(language: string, line: string, character: number) {
