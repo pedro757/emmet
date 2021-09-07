@@ -1,5 +1,5 @@
 {
-  "name": "emmet_ls",
+  "name": "ls_emmet",
   "version": "1.0.0",
   "description": "Just emmet completion with LSP",
   "main": "dist/server.js",
@@ -25,6 +25,6 @@
     "vscode-languageserver-textdocument": "^1.0.1"
   },
   "bin": {
-    "emmet_ls": "dist/server.js"
+    "ls_emmet": "dist/server.js"
   }
 }
