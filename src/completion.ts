@@ -1,47 +1,48 @@
 import expand, { extract } from "emmet";
-import { syntaxes } from "emmet/dist/src/config"
+import { syntaxes } from "emmet/dist/src/config";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import {
   TextDocumentPositionParams,
   TextDocuments,
   InsertTextFormat,
-  CompletionItemKind
+  CompletionItemKind,
 } from "vscode-languageserver/node";
 
-function parseLanguage(language:string): string {
-  if (language == 'javacriptreact' || language == 'typescriptreact') language = 'jsx'
-  if (language === 'javascript') language = 'js'
-  return language
+function parseLanguage(language: string): string {
+  if (language == "javacriptreact" || language == "typescriptreact")
+    language = "jsx";
+  if (language === "javascript") language = "js";
+  return language;
 }
 
 function isMarkupEmmet(language: string): boolean {
-  let markupSyntaxes = syntaxes.markup
-  language = parseLanguage(language)
+  let markupSyntaxes = syntaxes.markup;
+  language = parseLanguage(language);
 
-  if (markupSyntaxes.some(filetype => language == filetype)) {
-    return true
+  if (markupSyntaxes.some((filetype) => language == filetype)) {
+    return true;
   }
 
-  return false
+  return false;
 }
 
 function getSyntax(language: string): string | undefined {
   let availableSyntaxes = [...syntaxes.markup, ...syntaxes.stylesheet];
-  language = parseLanguage(language)
+  language = parseLanguage(language);
 
-  if (availableSyntaxes.some(syntax => syntax == language)) {
-    return language
+  if (availableSyntaxes.some((syntax) => syntax == language)) {
+    return language;
   }
 
-  return undefined
+  return undefined;
 }
 
 function getExtracted(language: string, line: string, character: number) {
-  let extracted
+  let extracted;
   if (isMarkupEmmet(language)) {
-    extracted = extract(line, character)
+    extracted = extract(line, character);
   } else {
-    extracted = extract(line, character, { type: "stylesheet" })
+    extracted = extract(line, character, { type: "stylesheet" });
   }
 
   if (extracted?.abbreviation == undefined) {
@@ -52,26 +53,29 @@ function getExtracted(language: string, line: string, character: number) {
     left: extracted.start,
     right: extracted.end,
     abbreviation: extracted.abbreviation,
-    location: extracted.location
-  }
+    location: extracted.location,
+  };
 }
 
 function getExpanded(language: string, abbreviation: string): string {
-  let expanded
+  let expanded;
   let options = {
-    "output.field": (index:any, placeholder:any) => `\$\{${index}${placeholder ? ":" + placeholder : ""}\}`,
-  }
-  let syntax = getSyntax(language)
+    "output.field": (index: any, placeholder: any) =>
+      "${" + index + placeholder && ":" + placeholder + "}",
+  };
+  let syntax = getSyntax(language);
   if (isMarkupEmmet(language)) {
-    expanded = expand(abbreviation, { options, syntax })
+    expanded = expand(abbreviation, { options, syntax });
   } else {
-    expanded = expand(abbreviation, { type: "stylesheet", options, syntax})
+    expanded = expand(abbreviation, { type: "stylesheet", options, syntax });
   }
-  return expanded
+  return expanded;
 }
 
-
-function complete(textDocsPosition: TextDocumentPositionParams, documents: TextDocuments<TextDocument>) {
+function complete(
+  textDocsPosition: TextDocumentPositionParams,
+  documents: TextDocuments<TextDocument>
+) {
   let docs = documents.get(textDocsPosition.textDocument.uri);
   if (!docs) throw "failed to find document";
   let languageId = docs.languageId;
@@ -80,8 +84,12 @@ function complete(textDocsPosition: TextDocumentPositionParams, documents: TextD
   let line = String(content.split(/\r?\n/g)[linenr]);
   let character = textDocsPosition.position.character;
 
-  const { left, right, abbreviation } = getExtracted(languageId, line, character)
-  let textResult = getExpanded(languageId, abbreviation)
+  const { left, right, abbreviation } = getExtracted(
+    languageId,
+    line,
+    character
+  );
+  let textResult = getExpanded(languageId, abbreviation);
 
   const range = {
     start: {
@@ -113,4 +121,4 @@ function complete(textDocsPosition: TextDocumentPositionParams, documents: TextD
   ];
 }
 
-export default complete
+export default complete;

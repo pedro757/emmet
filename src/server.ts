@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import complete from "./completion"
+import complete from "./completion";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import {
   CompletionItem,
@@ -38,7 +38,9 @@ documents.onDidClose(function (e) {
   documentSettings.delete(e.document.uri);
 });
 
-connection.onCompletion(function (textDocumentPosition: TextDocumentPositionParams): CompletionItem[] {
+connection.onCompletion(function (
+  textDocumentPosition: TextDocumentPositionParams
+): CompletionItem[] {
   try {
     return complete(textDocumentPosition, documents);
   } catch (error) {
