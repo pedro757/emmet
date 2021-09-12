@@ -13,7 +13,7 @@ Emmet support based on LSP. This is a fork of [this](https://github.com/aca/emme
 #### Install
 
 ```
-npm install -g emmet-ls
+npm install -g ls_emmet
 ```
 
 #### Configuration
@@ -27,9 +27,9 @@ npm install -g emmet-ls
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-  configs.emmet_ls = {
+  configs.ls_emmet = {
     default_config = {
-      cmd = {'emmet-ls', '--stdio'};
+      cmd = {'ls_emmet', '--stdio'};
       filetypes = {'html', 'css'};
       root_dir = function(fname)
         return vim.loop.cwd()
@@ -38,7 +38,7 @@ npm install -g emmet-ls
     };
   }
 
-  lspconfig.emmet_ls.setup{ capabilities = capabilities }
+  lspconfig.ls_emmet.setup{ capabilities = capabilities }
 
   ```
 
