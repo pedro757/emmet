@@ -2,7 +2,7 @@
 
 Emmet support based on LSP. This is a fork of [this](https://github.com/aca/emmet-ls) project that seems unmaintained
 
-![alt](https://i.ibb.co/TgHGmsb/emmet.gif)
+![emmet-gif](https://i.ibb.co/TgHGmsb/emmet.gif)
 
 #### Requirements
 1. [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) Installed
