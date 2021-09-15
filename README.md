@@ -6,9 +6,12 @@ Emmet support based on LSP. This is a fork of [this](https://github.com/aca/emme
 
 #### Requirements
 1. [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) Installed
-2. A completion plugin that support LSP like:
+2. A completion plugin that supports LSP, like:
     - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
     - [nvim-completion](https://github.com/nvim-lua/completion-nvim)
+3. A Snippet plugin that supports LSP, like:
+    - [luasnip](https://github.com/L3MON4D3/LuaSnip)
+    - [vim-vsnip](https://github.com/hrsh7th/vim-vsnip)
 
 #### Install
 
@@ -33,7 +36,7 @@ npm install -g ls_emmet
       filetypes = {'html', 'css'};
       root_dir = function(fname)
         return vim.loop.cwd()
-        end;
+      end;
       settings = {};
     };
   }
