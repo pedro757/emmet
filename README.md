@@ -32,8 +32,8 @@ npm install -g ls_emmet
 
   configs.ls_emmet = {
     default_config = {
-      cmd = {'ls_emmet', '--stdio'};
-      filetypes = {'html', 'css'};
+      cmd = { 'ls_emmet', '--stdio' };
+      filetypes = { 'html', 'css', 'scss' }; -- Add the languages you use, see language support
       root_dir = function(fname)
         return vim.loop.cwd()
       end;
@@ -69,3 +69,23 @@ And it will be expanded to:
   </tr>
 </table>
 ```
+
+#### Supported Languages
+
+##### markup:
+  - HTML
+  - JSX
+  - JS
+  - XML
+  - XSL
+  - HAML
+  - PUG
+  - SLIM
+
+##### stylesheets:
+  - CSS
+  - SCSS
+  - SASS
+  - STYLUS
+  - SSS
+  - LESS
