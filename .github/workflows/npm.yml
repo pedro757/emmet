@@ -1,0 +1,28 @@
+name: NPM publish CD workflow
+
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.release.target_commitish }}
+    - name: Use Node.js 14
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+        registry-url: https://registry.npmjs.org/
+    - run: npm ci
+    - run: git config --global user.name "GitHub CD bot"
+    - run: git config --global user.email "pedrosanchez201212@gmail.com"
+    - run: npm version ${{ github.event.release.tag_name }}
+    - run: npm run build
+    - run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+    - run: git push
+      env:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
