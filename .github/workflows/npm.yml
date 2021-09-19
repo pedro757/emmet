@@ -17,7 +17,7 @@ jobs:
         registry-url: https://registry.npmjs.org/
     - run: npm ci
     - run: git config --global user.name "GitHub CD bot"
-    - run: git config --global user.email "pedrosanchez201212@gmail.com"
+    - run: git config --global user.email "pedrosanchez757@hotmail.com"
     - run: npm version ${{ github.event.release.tag_name }}
     - run: npm run build
     - run: npm publish
