@@ -9,7 +9,7 @@ import {
 } from "vscode-languageserver/node";
 
 function parseLanguage(language: string): string {
-  if (language == "javacriptreact" || language == "typescriptreact")
+  if (language == "javascriptreact" || language == "typescriptreact")
     language = "jsx";
   if (language === "javascript") language = "js";
   return language;
