@@ -1,10 +1,10 @@
-# emmets
+# Emmets
 
 Emmet support based on LSP. This is a fork of [this](https://github.com/aca/emmet-ls) project that seems unmaintained
 
 ![emmet-gif](https://i.ibb.co/TgHGmsb/emmet.gif)
 
-#### Requirements
+### Requirements
 1. [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) Installed
 2. A completion plugin that supports LSP, like:
     - [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
@@ -13,13 +13,13 @@ Emmet support based on LSP. This is a fork of [this](https://github.com/aca/emme
     - [luasnip](https://github.com/L3MON4D3/LuaSnip)
     - [vim-vsnip](https://github.com/hrsh7th/vim-vsnip)
 
-#### Install
+### Install
 
 ```
 npm install -g ls_emmet
 ```
 
-#### Configuration
+### Configuration
 
   In your neovim config:
 
@@ -70,13 +70,12 @@ And it will be expanded to:
 </table>
 ```
 
-#### Contribuiting
+### Contribuiting
 Bug reports, feature suggestions and especially code contributions are most welcome. You open a GitHub issue or pull
 request. Please read [this document](CONTRIBUTING.md) before opening an issue.
 
-#### Supported Languages
-
-##### markup:
+### Supported Languages
+#### markup:
   - HTML
   - JSX
   - JS
@@ -85,8 +84,7 @@ request. Please read [this document](CONTRIBUTING.md) before opening an issue.
   - HAML
   - PUG
   - SLIM
-
-##### stylesheets:
+#### stylesheets:
   - CSS
   - SCSS
   - SASS
