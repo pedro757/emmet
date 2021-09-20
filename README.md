@@ -70,6 +70,10 @@ And it will be expanded to:
 </table>
 ```
 
+#### Contribuiting
+Bug reports, feature suggestions and especially code contributions are most welcome. You open a GitHub issue or pull
+request. Please read [this document](CONTRIBUTING.md) before opening an issue.
+
 #### Supported Languages
 
 ##### markup:
