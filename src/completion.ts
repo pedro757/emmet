@@ -1,5 +1,4 @@
 import expand, { extract } from "emmet";
-import { syntaxes } from "emmet/dist/src/config";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import {
   TextDocumentPositionParams,
@@ -7,6 +6,11 @@ import {
   InsertTextFormat,
   CompletionItemKind,
 } from "vscode-languageserver/node";
+
+const syntaxes = {
+  markup: ['html', 'xml', 'xsl', 'jsx', 'js', 'pug', 'slim', 'haml'],
+  stylesheet: ['css', 'sass', 'scss', 'less', 'sss', 'stylus']
+};
 
 function parseLanguage(language: string): string {
   if (language == "javascriptreact" || language == "typescriptreact")
@@ -61,7 +65,7 @@ function getExpanded(language: string, abbreviation: string): string {
   let expanded;
   let options = {
     "output.field": (index: any, placeholder: any) =>
-      "${" + index + placeholder && ":" + placeholder + "}",
+      "${" + index + (placeholder && ":" + placeholder) + "}",
   };
   let syntax = getSyntax(language);
   if (isMarkupEmmet(language)) {
