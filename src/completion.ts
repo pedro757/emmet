@@ -8,8 +8,8 @@ import {
 } from "vscode-languageserver/node";
 
 const syntaxes = {
-  markup: ['html', 'xml', 'xsl', 'jsx', 'js', 'pug', 'slim', 'haml'],
-  stylesheet: ['css', 'sass', 'scss', 'less', 'sss', 'stylus']
+  markup: ["html", "xml", "xsl", "jsx", "js", "pug", "slim", "haml"],
+  stylesheet: ["css", "sass", "scss", "less", "sss", "stylus"],
 };
 
 function parseLanguage(language: string): string {
