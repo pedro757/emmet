@@ -81,10 +81,11 @@ request. Please read [this document](CONTRIBUTING.md) before opening an issue.
 | Markup   | StyleSheets    |
 |--------- | -------------- |
 | HTML   | CSS    |
-| JSX    | SCSS   |
-| JS     | SASS   |
-| XML    | STYLUS |
-| XSL    | SSS    |
-| HAML   | LESS   |
+| TSX    | SCSS   |
+| JSX    | SASS   |
+| JS     | STYLUS |
+| XML    | SSS    |
+| XSL    | LESS   |
+| HAML   |        |
 | PUG    |        |
 | SLIM   |        |
