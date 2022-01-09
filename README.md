@@ -2,6 +2,8 @@
 
 Emmet support based on LSP. This is a fork of [this](https://github.com/aca/emmet-ls) project that seems unmaintained
 
+See emmet documentation [here](https://docs.emmet.io/)
+
 ![emmet-gif](https://i.ibb.co/TgHGmsb/emmet.gif)
 
 ## Requirements
