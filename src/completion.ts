@@ -8,7 +8,7 @@ import {
 } from "vscode-languageserver/node";
 
 const syntaxes = {
-  markup: ["html", "xml", "xsl", "jsx", "js", "pug", "slim", "haml"],
+  markup: ["html", "xml", "xsl", "jsx", "js", "pug", "slim", "haml", "hbs", "handlebars"],
   stylesheet: ["css", "sass", "scss", "less", "sss", "stylus"],
 };
 
