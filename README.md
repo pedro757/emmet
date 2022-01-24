@@ -1,6 +1,6 @@
 # Emmets
 
-Emmet support based on LSP. This is a fork of [this](https://github.com/aca/emmet-ls) project that seems unmaintained
+Emmet server for neovim completion based on LSP and official emmet library.
 
 See emmet documentation [here](https://docs.emmet.io/)
 
