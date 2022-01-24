@@ -91,3 +91,4 @@ request. Please read [this document](CONTRIBUTING.md) before opening an issue.
 | HAML   |        |
 | PUG    |        |
 | SLIM   |        |
+| HBS    |        |
