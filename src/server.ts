@@ -12,8 +12,8 @@ import {
   TextDocumentSyncKind,
 } from "vscode-languageserver/node";
 
-let connection = createConnection(ProposedFeatures.all);
-let documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
+const connection = createConnection(ProposedFeatures.all);
+const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
 
 const triggerCharacters = [
   ">",
@@ -85,7 +85,7 @@ interface ExampleSettings {
   maxNumberOfProblems: number;
 }
 
-let documentSettings: Map<string, Thenable<ExampleSettings>> = new Map();
+const documentSettings: Map<string, Thenable<ExampleSettings>> = new Map();
 
 documents.onDidClose(function (e) {
   documentSettings.delete(e.document.uri);
