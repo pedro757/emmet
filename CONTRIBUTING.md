@@ -1,7 +1,7 @@
 #### What should I do before opening an Pull Request?
 
 Before opening an issue, please ensure that:
-  - Use `prettier` to format and style the code
+  - Use `eslint` to format and style the code
   - Use `camelCase` to name variables and follow the style of the code
 
 #### What should I do before opening an issue?
