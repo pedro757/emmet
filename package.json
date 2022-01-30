@@ -26,5 +26,38 @@
   },
   "bin": {
     "ls_emmet": "dist/server.js"
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": [
+        "./tsconfig.json"
+      ]
+    },
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "indent": [
+        "error",
+        2
+      ],
+      "max-len": [
+        "error",
+        {
+          "code": 80
+        }
+      ],
+      "no-trailing-spaces": "error"
+    }
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1"
   }
 }
