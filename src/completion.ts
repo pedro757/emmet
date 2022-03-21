@@ -9,7 +9,7 @@ import {
 
 const syntaxes = {
   markup: ["html", "xml", "xsl", "jsx", "js", "pug", "slim", "haml", "hbs",
-    "handlebars", "php"],
+    "handlebars", "php", "vue"],
   stylesheet: ["css", "sass", "scss", "less", "sss", "stylus"],
 };
 
