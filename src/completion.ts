@@ -65,7 +65,7 @@ function getExtracted(language: string, line: string, character: number) {
 function getExpanded(language: string, abbreviation: string): string {
   let expanded;
   const options = {
-    "output.field": (index: any, placeholder: any) =>
+    "output.field": (index: number, placeholder: string) =>
       "${" + index + (placeholder && ":" + placeholder) + "}",
   };
   const syntax = getSyntax(language);
