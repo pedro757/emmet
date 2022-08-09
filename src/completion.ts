@@ -20,11 +20,11 @@ function parseLanguage(language: string): string {
   return language;
 }
 
-function isMarkupEmmet(language: string): boolean {
-  const markupSyntaxes = syntaxes.markup;
+function isStylesheet(language: string): boolean {
+  const stylesheetSyntaxes = syntaxes.stylesheet;
   language = parseLanguage(language);
 
-  if (markupSyntaxes.some((filetype) => language == filetype)) {
+  if (stylesheetSyntaxes.some((filetype) => language == filetype)) {
     return true;
   }
 
@@ -44,10 +44,10 @@ function getSyntax(language: string): string | undefined {
 
 function getExtracted(language: string, line: string, character: number) {
   let extracted;
-  if (isMarkupEmmet(language)) {
-    extracted = extract(line, character);
-  } else {
+  if (isStylesheet(language)) {
     extracted = extract(line, character, { type: "stylesheet" });
+  } else {
+    extracted = extract(line, character);
   }
 
   if (extracted?.abbreviation == undefined) {
@@ -69,10 +69,10 @@ function getExpanded(language: string, abbreviation: string): string {
       "${" + index + (placeholder && ":" + placeholder) + "}",
   };
   const syntax = getSyntax(language);
-  if (isMarkupEmmet(language)) {
-    expanded = expand(abbreviation, { options, syntax });
-  } else {
+  if (isStylesheet(language)) {
     expanded = expand(abbreviation, { type: "stylesheet", options, syntax });
+  } else {
+    expanded = expand(abbreviation, { options, syntax });
   }
   return expanded;
 }
